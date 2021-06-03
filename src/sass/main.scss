@@ -108,3 +108,8 @@ img {
   display: flex;
   justify-content: flex-start;
 }
+.countries-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
