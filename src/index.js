@@ -3,6 +3,8 @@ import countryCardTpl from "./templates/country-card.hbs";
 import countriesListTpl from "./templates/country-list.hbs";
 import API from "./fetchCountries";
 import debounce from "lodash.debounce";
+import { error } from "@pnotify/core";
+import "@pnotify/core/dist/PNotify.css";
 
 const cardContainer = document.querySelector(".js-card-container");
 const searchInput = document.querySelector(".js-search-input");
@@ -49,6 +51,13 @@ const clearAll = () => {
   clearList();
   listContainer.innerHTML = " ";
   cardContainer.innerHTML = " ";
+};
+
+const tooMany = () => {
+  error({
+    text: "Too many matches found. Please, enter a more specific query!",
+    delay: 2500,
+  });
 };
 
 searchInput.addEventListener("input", debounce(onCountrySearch, 500));
