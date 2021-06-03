@@ -33,10 +33,16 @@ const countryInfoSearch = (countries) => {
   } else if (countries.length === 1) {
     clearList();
     makeCountryCard(countries);
+  } else {
+    onFetchError();
   }
 };
 
-const onFetchError = (error) => {
+const onFetchError = () => {
+  error({
+    text: "There is no such country! Try again:)",
+    delay: 3000,
+  });
   clearList();
 };
 
