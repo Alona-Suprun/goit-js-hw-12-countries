@@ -7,6 +7,7 @@ import debounce from "lodash.debounce";
 const cardContainer = document.querySelector(".js-card-container");
 const searchInput = document.querySelector(".js-search-input");
 const listContainer = document.querySelector(".js-list-container");
+const clearButton = document.querySelector(".clear-button");
 
 const makeCountryCard = (country) => {
   const markup = countryCardTpl(country);
@@ -43,4 +44,13 @@ const onCountrySearch = (e) => {
   API.fetchCountries(searchQuery).then(countryInfoSearch).catch(onFetchError);
 };
 
+const clearAll = () => {
+  searchInput.value = " ";
+  clearList();
+  listContainer.innerHTML = " ";
+  cardContainer.innerHTML = " ";
+};
+
 searchInput.addEventListener("input", debounce(onCountrySearch, 500));
+
+clearButton.addEventListener("click", clearAll);
