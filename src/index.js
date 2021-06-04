@@ -5,6 +5,7 @@ import API from "./fetchCountries";
 import debounce from "lodash.debounce";
 import { error } from "@pnotify/core";
 import "@pnotify/core/dist/PNotify.css";
+import "@pnotify/core/dist/BrightTheme.css";
 
 const cardContainer = document.querySelector(".js-card-container");
 const searchInput = document.querySelector(".js-search-input");
@@ -23,6 +24,7 @@ const makeCountriesList = (list) => {
 
 const clearList = () => {
   listContainer.innerHTML = " ";
+  cardContainer.innerHTML = " ";
 };
 
 const countryInfoSearch = (countries) => {
@@ -48,7 +50,10 @@ const onFetchError = () => {
 
 const onCountrySearch = (e) => {
   const searchQuery = e.target.value;
-
+  clearList();
+  if (!searchQuery) {
+    return;
+  }
   API.fetchCountries(searchQuery).then(countryInfoSearch).catch(onFetchError);
 };
 
